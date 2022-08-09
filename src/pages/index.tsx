@@ -13,11 +13,11 @@ const Home: NextPage = (props: any) => {
     return <div>Loading...</div>;
   } else {
     return (
-      <div>
+      <div className="bg-slate-700 rounded-lg p-4 m-auto w-[90%] flex justify-center align-middle">
         your tasks
         {data?.map((task) => {
           return (
-            <div key={task.ID}>
+            <div key={task.ID} className="">
               <span>task {task.TITLE}</span>
             </div>
           );
