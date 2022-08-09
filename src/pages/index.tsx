@@ -7,18 +7,18 @@ import { prisma } from "../db/client";
 import { trpc } from "../utils/trpc";
 
 const Home: NextPage = (props: any) => {
-  const { data, isLoading } = trpc.useQuery(["questions"]);
+  const { data, isLoading } = trpc.useQuery(["tasks"]);
 
   if (isLoading || !data) {
     return <div>Loading...</div>;
   } else {
     return (
       <div>
-        POLLS hi there
-        {data?.map((poll) => {
+        your tasks
+        {data?.map((task) => {
           return (
-            <div key={poll.id}>
-              <span>POLLs</span>
+            <div key={task.ID}>
+              <span>task {task.TITLE}</span>
             </div>
           );
         })}

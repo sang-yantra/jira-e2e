@@ -1,13 +1,13 @@
-import * as trpc from '@trpc/server';
-import * as trpcNext from '@trpc/server/adapters/next';
-import { z } from 'zod';
-import superjson from "superjson"
-import {prisma} from "../../../db/client"
+import * as trpc from "@trpc/server";
+import * as trpcNext from "@trpc/server/adapters/next";
+import { z } from "zod";
+import superjson from "superjson";
+import { prisma } from "../../../db/client";
 
 export const appRouter = trpc
   .router()
   .transformer(superjson)
-  .query('hello', {
+  .query("hello", {
     input: z
       .object({
         text: z.string().nullish(),
@@ -15,15 +15,19 @@ export const appRouter = trpc
       .nullish(),
     resolve({ input }) {
       return {
-        greeting: `hello ${input?.text ?? 'world'}`,
+        greeting: `hello ${input?.text ?? "world"}`,
       };
     },
   })
-  .query("questions",{
-    async resolve(){
-      
+  .query("questions", {
+    async resolve() {
       return await prisma.pollQuestion.findMany();
-    }
+    },
+  })
+  .query("tasks", {
+    async resolve() {
+      return await prisma.tASK.findMany();
+    },
   });
 
 // export type definition of API
